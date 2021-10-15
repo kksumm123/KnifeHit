@@ -2,11 +2,55 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+public enum GameState
+{
+    None,
+    Play,
+    GameOver,
+}
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    void Awake() => instance = this;
+
+    GameState gameState = GameState.None;
+    public GameState GameState
+    {
+        get => gameState;
+        set
+        {
+            if (gameState == value)
+                return;
+            gameState = value;
+            switch (gameState)
+            {
+                case GameState.Play:
+                    Time.timeScale = 1;
+                    break;
+                case GameState.GameOver:
+                    reStartRealTime = Time.realtimeSinceStartup + 1;
+                    Time.timeScale = 0;
+                    break;
+            }
+        }
+    }
+
+    internal void AddPoint()
+    {
+        point++;
+        pointText.text = point.ToString();
+        if (point == totalKnifeCount)
+        {
+            Debug.LogWarning("스테이지 클리어");
+            GameObject.Find("Board").GetComponent<RandomRotateZ>().StopAllCoroutines();
+        }
+    }
+
     GameObject knife;
+    Text pointText;
+    int point;
     Image baseKnifeIcon;
     List<Image> knifeIcons = new List<Image>();
     Sprite usableKnifeIcon;
@@ -18,6 +62,7 @@ public class GameManager : MonoBehaviour
         knife = (GameObject)Resources.Load("Knife");
         knife.GetComponent<Knife>().enabled = false;
         knife.SetActive(false);
+        pointText = GameObject.Find("Canvas").transform.Find("PointText").GetComponent<Text>();
         baseKnifeIcon = GameObject.Find("Canvas").transform.Find("KnifeCount/BaseIcon").GetComponent<Image>();
         usableKnifeIcon = Resources.Load<Sprite>("UsableKnife");
         usedKnifeIcon = Resources.Load<Sprite>("UsedKnife");
@@ -38,8 +83,17 @@ public class GameManager : MonoBehaviour
         knifeIcons.ForEach(x => x.sprite = usableKnifeIcon);
     }
 
+    float reStartRealTime;
     void Update()
     {
+        if (GameState == GameState.GameOver)
+        {
+            if (Input.anyKeyDown && Time.realtimeSinceStartup > reStartRealTime)
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
         if (Input.anyKeyDown && throwable)
         {
             if (usedKniftCount < totalKnifeCount)
@@ -67,7 +121,6 @@ public class GameManager : MonoBehaviour
 
         CreateKnife();
     }
-
     private void IncreaseUsedKnifeCount()
     {
         knifeIcons[usedKniftCount].sprite = usedKnifeIcon;

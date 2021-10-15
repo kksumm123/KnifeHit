@@ -24,6 +24,7 @@ public class Knife : MonoBehaviour
         if (collision.collider.CompareTag("Board"))
         {
             Debug.Log("Á¡¼ö È¹µæ");
+            GameManager.instance.AddPoint();
         }
         else if (collision.collider.CompareTag("FixedKnife"))
         {
