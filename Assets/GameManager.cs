@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     GameObject knife;
     void Start()
     {
-        knife = GameObject.Find("Knife");
+        knife = (GameObject)Resources.Load("Knife");
         knife.GetComponent<KnifeMove>().enabled = false;
         knife.SetActive(false);
     }
