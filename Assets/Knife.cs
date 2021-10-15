@@ -34,5 +34,10 @@ public class Knife : MonoBehaviour
             rigid.AddTorque(Random.Range(-180, 180), ForceMode2D.Force);
             Debug.Log("게임 오버");
         }
+        else if (collision.collider.CompareTag("Apple"))
+        {
+            GameManager.instance.HitApple();
+            Debug.Break();
+        }
     }
 }

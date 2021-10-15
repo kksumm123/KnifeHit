@@ -48,9 +48,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    internal void HitApple()
+    {
+        applePoint++;
+        applePointText.text = applePoint.ToString();
+    }
+
     GameObject knife;
     Text pointText;
     int point;
+    Text applePointText;
+    int applePoint;
     Image baseKnifeIcon;
     List<Image> knifeIcons = new List<Image>();
     Sprite usableKnifeIcon;
@@ -62,11 +70,15 @@ public class GameManager : MonoBehaviour
         knife = (GameObject)Resources.Load("Knife");
         knife.GetComponent<Knife>().enabled = false;
         knife.SetActive(false);
-        pointText = GameObject.Find("Canvas").transform.Find("PointText").GetComponent<Text>();
-        baseKnifeIcon = GameObject.Find("Canvas").transform.Find("KnifeCount/BaseIcon").GetComponent<Image>();
+        var canvas = GameObject.Find("Canvas");
+        pointText = canvas.transform.Find("PointText").GetComponent<Text>();
+        applePointText = canvas.transform.Find("AppleScoreUI/Text").GetComponent<Text>();
+        baseKnifeIcon = canvas.transform.Find("KnifeCount/BaseIcon").GetComponent<Image>();
         usableKnifeIcon = Resources.Load<Sprite>("UsableKnife");
         usedKnifeIcon = Resources.Load<Sprite>("UsedKnife");
 
+        pointText.text = point.ToString();
+        applePointText.text = applePoint.ToString();
         CreateKnife();
         InitKnifeIcons(totalKnifeCount);
     }
