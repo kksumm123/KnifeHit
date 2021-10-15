@@ -37,7 +37,6 @@ public class Knife : MonoBehaviour
         else if (collision.collider.CompareTag("Apple"))
         {
             GameManager.instance.HitApple();
-            Debug.Break();
         }
     }
 }
