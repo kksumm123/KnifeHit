@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         knife = (GameObject)Resources.Load("Knife");
-        knife.GetComponent<KnifeMove>().enabled = false;
+        knife.GetComponent<Knife>().enabled = false;
         knife.SetActive(false);
     }
 
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     void CreateKnife()
     {
         newKnife = Instantiate(knife);
-        newKnife.GetComponent<KnifeMove>().enabled = true;
+        newKnife.GetComponent<Knife>().enabled = true;
         newKnife.SetActive(true);
     }
 }

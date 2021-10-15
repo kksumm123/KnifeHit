@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeMove : MonoBehaviour
+public class Knife : MonoBehaviour
 {
     [SerializeField] Vector3 direction = Vector3.up;
     [SerializeField] float speed = 50;
