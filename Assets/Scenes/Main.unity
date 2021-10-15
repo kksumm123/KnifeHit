@@ -457,7 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f9158682c0fef4ebe3d909755ebdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knife: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1396481833}
   - component: {fileID: 1396481834}
+  - component: {fileID: 1396481835}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -1081,6 +1081,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1396481835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396481832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b90878151bfbb043a1c47da0c54cc1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  speed: 50
 --- !u!1 &1466292040
 GameObject:
   m_ObjectHideFlags: 0
