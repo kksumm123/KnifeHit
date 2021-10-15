@@ -30,6 +30,7 @@ public class RandomRotateZ : MonoBehaviour
             DOTween.To(() => startAngle
                 , x => transform.rotation = Quaternion.Euler(0.0f, 0.0f, x), angle, duration
                 ).SetEase(ease)
+                 .SetLink(gameObject)
                  .OnComplete(() => isComplete = true);
 
             while (isComplete == false)

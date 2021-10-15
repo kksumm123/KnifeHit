@@ -39,26 +39,41 @@ public class GameManager : MonoBehaviour
 
     internal void AddPoint()
     {
-        point++;
-        pointText.text = point.ToString();
-        if (point == totalKnifeCount)
+        Point++;
+        pointText.text = Point.ToString();
+        if (usedKniftCount == totalKnifeCount)
         {
             Debug.LogWarning("스테이지 클리어");
             GameObject.Find("Board").GetComponent<RandomRotateZ>().StopAllCoroutines();
+            GlobalManager.intantce.StageClear();
         }
     }
 
     internal void HitApple()
     {
-        applePoint++;
-        applePointText.text = applePoint.ToString();
+        ApplePoint++;
+        applePointText.text = ApplePoint.ToString();
     }
 
     GameObject knife;
     Text pointText;
-    int point;
+    int Point
+    {
+        get => GlobalManager.intantce.point;
+        set => GlobalManager.intantce.point = value;
+    }
     Text applePointText;
-    int applePoint;
+    int ApplePoint
+    {
+        get => GlobalManager.intantce.applePoint;
+        set => GlobalManager.intantce.applePoint = value;
+    }
+    Text stageText;
+    int Stage
+    {
+        get => GlobalManager.intantce.stage;
+        set => GlobalManager.intantce.stage = value;
+    }
     Image baseKnifeIcon;
     List<Image> knifeIcons = new List<Image>();
     Sprite usableKnifeIcon;
@@ -73,12 +88,14 @@ public class GameManager : MonoBehaviour
         var canvas = GameObject.Find("Canvas");
         pointText = canvas.transform.Find("PointText").GetComponent<Text>();
         applePointText = canvas.transform.Find("AppleScoreUI/Text").GetComponent<Text>();
+        stageText = canvas.transform.Find("StageUI/Text").GetComponent<Text>();
         baseKnifeIcon = canvas.transform.Find("KnifeCount/BaseIcon").GetComponent<Image>();
         usableKnifeIcon = Resources.Load<Sprite>("UsableKnife");
         usedKnifeIcon = Resources.Load<Sprite>("UsedKnife");
 
-        pointText.text = point.ToString();
-        applePointText.text = applePoint.ToString();
+        stageText.text = $"Stage {Stage}";
+        pointText.text = Point.ToString();
+        applePointText.text = ApplePoint.ToString();
         CreateKnife();
         InitKnifeIcons(totalKnifeCount);
     }
