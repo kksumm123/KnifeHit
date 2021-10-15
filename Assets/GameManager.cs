@@ -11,21 +11,35 @@ public class GameManager : MonoBehaviour
         knife = (GameObject)Resources.Load("Knife");
         knife.GetComponent<Knife>().enabled = false;
         knife.SetActive(false);
+        CreateKnife();
     }
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && throwable)
         {
-            CreateKnife();
+           StartCoroutine(ThrowNewKnife());
         }
     }
 
     GameObject newKnife;
+    bool throwable = false;
     void CreateKnife()
     {
         newKnife = Instantiate(knife);
-        newKnife.GetComponent<Knife>().enabled = true;
         newKnife.SetActive(true);
+        throwable = true;
     }
+
+    float throwDelay = 0.1f;
+    IEnumerator ThrowNewKnife()
+    {
+        throwable = false;
+        newKnife.GetComponent<Knife>().enabled = true;
+
+        yield return new WaitForSeconds(throwDelay);
+
+        CreateKnife();
+    }
+
 }
