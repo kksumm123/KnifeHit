@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 public class RandomRotateZ : MonoBehaviour
 {
-    public float minAngle = 1000f;
+    public float minAngle = 300f;
     public float maxAngle = 1200f;
     public float minDuration = 3;
     public float maxDuration = 5;

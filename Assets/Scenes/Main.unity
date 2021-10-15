@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bce27303a403d84aa6d577e13bf95af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: 1000
+  minAngle: 300
   maxAngle: 1200
   minDuration: 3
   maxDuration: 5
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2e273ea64fc8b4fa4de337fe495442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appleRaio: 0.3
+  appleRatio: 0.3
   appleMaxCount: 2
 --- !u!1 &833318445
 GameObject:
